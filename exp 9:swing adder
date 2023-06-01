@@ -1,1 +1,79 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SwingAdder extends JFrame implements ActionListener {
+    private JTextField num1Field;
+    private JTextField num2Field;
+    private JTextField resultField;
+    private JButton addButton;
+    private JButton subButton;
+    private JButton clearButton;
+
+    public SwingAdder() {
+        setTitle("SwingAdder");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+
+        JLabel num1Label = new JLabel("Number 1:");
+        add(num1Label);
+
+        num1Field = new JTextField(10);
+        add(num1Field);
+
+        JLabel num2Label = new JLabel("Number 2:");
+        add(num2Label);
+
+        num2Field = new JTextField(10);
+        add(num2Field);
+
+        addButton = new JButton("ADD");
+        addButton.addActionListener(this);
+        add(addButton);
+
+        subButton = new JButton("SUB");
+        subButton.addActionListener(this);
+        add(subButton);
+
+        clearButton = new JButton("CLEAR");
+        clearButton.addActionListener(this);
+        add(clearButton);
+
+        JLabel resultLabel = new JLabel("Result:");
+        add(resultLabel);
+
+        resultField = new JTextField(10);
+        resultField.setEditable(false);
+        add(resultField);
+
+        pack();
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == addButton) {
+            int num1 = Integer.parseInt(num1Field.getText());
+            int num2 = Integer.parseInt(num2Field.getText());
+            int result = num1 + num2;
+            resultField.setText(Integer.toString(result));
+        } else if (event.getSource() == subButton) {
+            int num1 = Integer.parseInt(num1Field.getText());
+            int num2 = Integer.parseInt(num2Field.getText());
+            int result = num1 - num2;
+            resultField.setText(Integer.toString(result));
+        } else if (event.getSource() == clearButton) {
+            num1Field.setText("");
+            num2Field.setText("");
+            resultField.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new SwingAdder();
+            }
+        });
+    }
+}
 
